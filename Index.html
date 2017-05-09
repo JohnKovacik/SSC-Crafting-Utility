@@ -1,0 +1,1309 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="./CraftingUtility.js">
+
+    </script>
+    <style>
+        body {
+            background-image: url(bg-mystic-sm2.png);
+        }
+    </style>
+</head>
+<body>
+    <div class="container card mt-3">
+        <div class="row">
+            <div class="col mt-2 text-right">
+                <button type="button" id="btnToogleTooltips" role="button" class="btn btn-sm btn-secondary mr-3" style="width: 125px">Enable Tooltips</button>
+                <a tabindex="0" class="btn btn-sm btn-outline-danger" role="button" data-placement="bottom" data-toggle="popover" data-trigger="focus" title="Creation Assistant Disclaimer" style="width: 125px"
+                   data-content="The 'Stories in the Sanguine City - Magic Item Creation Assistant' is an unauthorized utility. It has not been reviewed by, nor is it approved by the SSC Storytellers. This site is strictly for entertainment purposes.">
+                    <b>DISCLAIMER</b>
+                </a>
+            </div>
+        </div>
+        <div class="row mb-4">
+            <div class="col"><h3>Stories in the Sanguine City - Magic Item Creation Assistant</h3></div>
+        </div>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#charInfo" id="charInfoTab" role="tab">Character Information</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#itemEffects" id="itemEffectsTab" role="tab">Item Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#creation" id="creationTab" role="tab">Creation Details</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#results" id="resultsTab" role="tab">Results</a>
+            </li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content border border-top-0 mb-3">
+            <div class="tab-pane fade show active" id="charInfo" role="tabpanel">
+                <div class="container card border-top-0">
+                    <div class="row mt-2">
+                        <div class="col-6 mt-2">
+                            <h5 data-toggle="tooltip" data-placement="left" title="Approaches (Careful, Clever, Flashy, Forceful, Quick, Sneaky) are ranked on your character sheet from 0 to 3.">Approaches</h5>
+                        </div>
+                        <div class="col-6">
+                            <div class="btn-group" role="group">
+                                <h5 class="mt-2" data-toggle="tooltip" data-placement="left" title="If you have created or acquired a Focus Item to help you create Enchanted Items and Potions, specify their strength here. You cannot use Focus Items to help create new Focus Items.">Thaumaturgy (Crafting) Focus Items</h5>
+                                <span style="width:160px">&nbsp;</span>
+                                <a tabindex="0" class="btn btn-sm" role="button" data-placement="right" data-toggle="popover" data-trigger="focus" title="Character Information Help" data-content="In the Character Information tab, you supply the information on your character sheet that determines how skilled a crafter you are. Include any items that might help when crafting, any specializations you have, and any stress and consequences that you've already used up (to show what is available to pay down complexity)."><img src="Info.png" /></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon1" data-toggle="tooltip" data-placement="top" title="Conviction/Lore is the approach marked by an asterisk ('*') on your character sheet. All practioners should have selected this.">Lore</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrl_Conviction" aria-describedby="addon1">
+                                    <option value="0">Mediocre (0)</option>
+                                    <option value="1">Average (1)</option>
+                                    <option value="2">Fair (2)</option>
+                                    <option value="3">Good (3)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon4" data-toggle="tooltip" data-placement="top" title="The approach you will use to cast/roll power. Cannot be the same as your Lore approach.">Casting</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrl_Casting" aria-describedby="addon4">
+                                    <option value="0">Mediocre (0)</option>
+                                    <option value="1">Average (1)</option>
+                                    <option value="2">Fair (2)</option>
+                                    <option value="3">Good (3)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon2" data-toggle="tooltip" data-placement="top" title="If you have a focus item with Thaumaturgy-Crafting Complexity, specify the level here.">Complexity</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrl_FocusBonusComplexity" aria-describedby="addon2">
+                                    <option selected value="0">0</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon3" data-toggle="tooltip" data-placement="top" title="If you have a focus item with Thaumaturgy-Crafting Casting/Roll Power, specify the level here.">Casting</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrl_FocusBonusCasting" aria-describedby="addon3">
+                                    <option selected value="0">0</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2" data-toggle="tooltip" data-placement="left" title="If you have Thaumaturgy, and have selected a specialization in crafting, you may add it in this section. Additional specialization levels can be purchased as Refinements.">
+                            <h5>Specializations</h5>
+                        </div>
+                        <div class="col-10">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon5" data-toggle="tooltip" data-placement="top" title="Focus specialization only applies to focus items. It allows you to add an additional focus effect without increasing the complexity, power, or slot cost.">Focus</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrl_SpecializationFocus" aria-describedby="addon5">
+                                    <option value="0" selected>--</option>
+                                    <option value="1">x1</option>
+                                    <option value="2">x2</option>
+                                    <option value="3">x3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon6" data-toggle="tooltip" data-placement="top" title="Power specialization only applies to enchanted items and potions. It allows you to add an additional effect without increasing the complexity, power, or slot cost.">Power</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrl_SpecializationPower" aria-describedby="addon6">
+                                    <option value="0" selected>--</option>
+                                    <option value="1">x1</option>
+                                    <option value="2">x2</option>
+                                    <option value="3">x3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon7" data-toggle="tooltip" data-placement="top" title="Frequency specialization adds an additional use for free when creating enchanted items. It does not apply to focus items or potions.">Frequency</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrl_SpecializationFrequency" aria-describedby="addon7">
+                                    <option value="0" selected>--</option>
+                                    <option value="1">x1</option>
+                                    <option value="2">x2</option>
+                                    <option value="3">x3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon8" data-toggle="tooltip" data-placement="top" title="Size specialization allows you to create a focus item or enchanted item one size category smaller than its power normally requires, or create a potion that is less noticable.">Size</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrl_SpecializationSize" aria-describedby="addon8">
+                                    <option value="0" selected>--</option>
+                                    <option value="1">x1</option>
+                                    <option value="2">x2</option>
+                                    <option value="3">x3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2" data-toggle="tooltip" data-placement="left" title="Stress that is ALREADY USED before item creation begins, and thus is not available.">
+                            <h5>Stress</h5>
+                        </div>
+                        <div class="col-10">
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-1">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon1" data-toggle="tooltip" data-placement="top" title="Physical Stress that has already been used.">Physical</span>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div data-toggle="buttons" class="ml-3 mt-1">
+                                <label class="btn btn-outline-danger btn-sm">
+                                    <input type="checkbox" value="1" id="chkPhyStressAvail1" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-danger btn-sm">
+                                    <input type="checkbox" value="2" id="chkPhyStressAvail2" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-danger btn-sm">
+                                    <input type="checkbox" value="3" id="chkPhyStressAvail3" autocomplete="off">&nbsp;
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon1" data-toggle="tooltip" data-placement="top" title="Mental Stress that has already been used.">Mental</span>
+
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div data-toggle="buttons" class="ml-3 mt-1">
+                                <label class="btn btn-outline-danger btn-sm">
+                                    <input type="checkbox" value="1" id="chkMenStressAvail1" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-danger btn-sm">
+                                    <input type="checkbox" value="2" id="chkMenStressAvail2" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-danger btn-sm">
+                                    <input type="checkbox" value="3" id="chkMenStressAvail3" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-danger btn-sm">
+                                    <input type="checkbox" value="4" id="chkMenStressAvail4" autocomplete="off">&nbsp;
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon1" data-toggle="tooltip" data-placement="top" title="Wealth Stress that has already been used.">Wealth</span>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div data-toggle="buttons" class="ml-3 mt-1">
+                                <label class="btn btn-outline-danger btn-sm">
+                                    <input class="maxWealth1" value="1" type="checkbox" id="chkWealthStressAvail1" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-danger btn-sm">
+                                    <input class="maxWealth2" value="2" type="checkbox" id="chkWealthStressAvail2" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-danger btn-sm">
+                                    <input class="maxWealth3" value="3" type="checkbox" id="chkWealthStressAvail3" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-danger btn-sm">
+                                    <input class="maxWealth4" value="4" type="checkbox" id="chkWealthStressAvail4" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-danger btn-sm">
+                                    <input class="maxWealth5" value="5" type="checkbox" id="chkWealthStressAvail5" autocomplete="off">&nbsp;
+                                </label>
+                            </div>
+
+                        </div>
+                        <div class="col-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon1" data-toggle="tooltip" data-placement="top" title="Total Wealth Stress that you normally have available.">Wealth Max</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrl_MaxWealth" aria-describedby="addon8">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3" selected>3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-2" data-toggle="tooltip" data-placement="left" title="Consequences that are ALREADY USED before item creation begins, and thus is not available.">
+                            <h5>Consequences</h5>
+                        </div>
+                        <div class="col-10">
+
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-1">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon1" data-toggle="tooltip" data-placement="top" title="Physical Consequences that have already been used.">Physical</span>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div data-toggle="buttons" class="ml-3 mt-1 btn-group-sm btn-block">
+                                <label class="btn btn-outline-danger w-25 mr-4">
+                                    <input type="checkbox" value="2" id="chkPhyConsAvail1" autocomplete="off">Mild (2)
+                                </label>
+                                <label class="btn btn-outline-danger w-25 mr-4">
+                                    <input type="checkbox" value="4" id="chkPhyConsAvail2" autocomplete="off">Moderate (4)
+                                </label>
+                                <label class="btn btn-outline-danger w-25 mr-4">
+                                    <input type="checkbox" value="6" id="chkPhyConsAvail3" autocomplete="off">Severe (6)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon1" data-toggle="tooltip" data-placement="top" title="Mental Consequences that have already been used.">Mental</span>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div data-toggle="buttons" class="ml-3 mt-1 btn-group-sm btn-block">
+                                <label class="btn btn-outline-danger w-25 mr-4">
+                                    <input type="checkbox" value="2" id="chkMentConsAvail1" autocomplete="off">Mild (2)
+                                </label>
+                                <label class="btn btn-outline-danger w-25 mr-4">
+                                    <input type="checkbox" value="4" id="chkMentConsAvail2" autocomplete="off">Moderate (4)
+                                </label>
+                                <label class="btn btn-outline-danger w-25 mr-4">
+                                    <input type="checkbox" value="6" id="chkMentConsAvail3" autocomplete="off">Severe (6)
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="itemEffects" role="tabpanel">
+                <div class="container card border-top-0">
+                    <div class="row mt-2">
+                        <div class="col-2 mt-2">
+                            <h5>Item Description</h5>
+                        </div>
+                        <div class="col-9">
+                        </div>
+                        <div class="col text-right">
+                            <a tabindex="0" class="btn btn-sm" role="button" data-placement="right" data-toggle="popover" data-trigger="focus" title="Item Details Help" data-content="In the Item Details tab, you provide the description of the item and the effects that the item provides. When you select the Item Type, you'll be able to select effects approrpiate to that type."><img src="Info.png" /></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon10" data-toggle="tooltip" data-placement="top" title="Supply a brief description of the item here.">Item Title</span>
+                                <input id="ctrl_ItemTitle" class="form-control" aria-describedby="addon10" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon11" data-toggle="tooltip" data-placement="top" title="Supply additional flavor text here.">Item Description</span>
+                                <input id="ctrl_ItemDescription" class="form-control" aria-describedby="addon11" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon9" data-toggle="tooltip" data-placement="top" title="Specify whether an item can be used by anyone ('open') or by only one person ('closed'). By default, potions are open and focus and enchanted items are closed. Making a potion closed, or making a focus item or enchanted item open, will increase the power and complexity cost. For potions and enchanted items, it will also increase the slot cost.">Status</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrl_OwnerStatus" aria-describedby="addon8">
+                                    <option value="CLSD" selected>Closed</option>
+                                    <option value="OPEN">Open</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon9" data-toggle="tooltip" data-placement="top" title="If closed, specify the owner/target. You can include the Player Name, if known, in parenthesis afterwards.">Character Name</span>
+                                <input id="ctrl_OwnerCharName" class="form-control" aria-describedby="addon9" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col-2 mt-2">
+                            <h5>Item Effects</h5>
+                        </div>
+                        <div class="col-10 text-right">
+                            <button type="button" id="btnResetEffects" role="button" class="btn btn-sm btn-secondary mt-1 mr-2" style="width: 100px">Clear</button>
+                        </div>
+                    </div>
+                    <div class="row mt-1 mb-3">
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="ddlItemType" data-toggle="tooltip" data-placement="left" title="You must select a type before you can specify the item effect(s).">Item Type</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrl_ItemType" aria-describedby="ddlItemType">
+                                    <option value="" selected>(Select)</option>
+                                    <option value="focus">Focus Item: Multiple-use item that improves specific spellcasting efforts.</option>
+                                    <option value="item">Enchanted Item: Rechargeable item that performs a specific function.</option>
+                                    <option value="potion">Potion: Consumable item that can normally be used by anyone.</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container startHidden" id="itemType_focus">
+                        <div class="row">
+                            <div class="col-6 mt-2">
+                                <button class="btn btn-secondary btn-block" id="btnAddEvocation">Add Evocation / Channeling Effect</button>
+                            </div>
+                            <div class="col-6 mt-2">
+                                <button class="btn btn-secondary btn-block" id="btnAddThaumaturgy">Add Thaumaturgy / Ritual Effect</button>
+                            </div>
+                        </div>
+                        <div class="row mt-2" id="rowEvoc1">
+                            <div class="col-4 align-self-center">
+                                <h6 class="text-right">Evocation / Channeling Effect 1:</h6>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlEvocOffDef1">
+                                    <option value="" selected>--</option>
+                                    <option value="Offensive">Offensive</option>
+                                    <option value="Defensive">Defensive</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlEvocElem1">
+                                    <option value="" selected>--</option>
+                                    <option value="Earth">Earth</option>
+                                    <option value="Air">Air</option>
+                                    <option value="Fire">Fire</option>
+                                    <option value="Water">Water</option>
+                                    <option value="Spirit/Force">Spirit/Force</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlEvocType1">
+                                    <option value="" selected>--</option>
+                                    <option value="Power">Power</option>
+                                    <option value="Casting">Casting</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlEvocStr1">
+                                    <option value="" selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-outline-danger btn-sm mt-1" id="btnDelEvoc1">X</button>
+                            </div>
+                        </div>
+                        <div class="row mt-2" id="rowEvoc2">
+                            <div class="col-4 align-self-center">
+                                <h6 class="text-right">Evocation / Channeling Effect 2:</h6>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlEvocOffDef2">
+                                    <option value="" selected>--</option>
+                                    <option value="Offensive">Offensive</option>
+                                    <option value="Defensive">Defensive</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlEvocElem2">
+                                    <option value="" selected>--</option>
+                                    <option value="Earth">Earth</option>
+                                    <option value="Air">Air</option>
+                                    <option value="Fire">Fire</option>
+                                    <option value="Water">Water</option>
+                                    <option value="Spirit/Force">Spirit/Force</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlEvocType2">
+                                    <option value="" selected>--</option>
+                                    <option value="Power">Power</option>
+                                    <option value="Casting">Casting</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlEvocStr2">
+                                    <option value="" selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-outline-danger btn-sm mt-1" id="btnDelEvoc2">X</button>
+                            </div>
+
+                        </div>
+                        <div class="row mt-2" id="rowEvoc3">
+                            <div class="col-4 align-self-center">
+                                <h6 class="text-right">Evocation / Channeling Effect 3:</h6>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlEvocOffDef3">
+                                    <option value="" selected>--</option>
+                                    <option value="Offensive">Offensive</option>
+                                    <option value="Defensive">Defensive</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlEvocElem3">
+                                    <option value="" selected>--</option>
+                                    <option value="Earth">Earth</option>
+                                    <option value="Air">Air</option>
+                                    <option value="Fire">Fire</option>
+                                    <option value="Water">Water</option>
+                                    <option value="Spirit/Force">Spirit/Force</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlEvocType3">
+                                    <option value="" selected>--</option>
+                                    <option value="Power">Power</option>
+                                    <option value="Casting">Casting</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlEvocStr3">
+                                    <option value="" selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-outline-danger btn-sm mt-1" id="btnDelEvoc3">X</button>
+                            </div>
+
+                        </div>
+                        <div class="row mt-2" id="rowThau1">
+                            <div class="col-4 align-self-center">
+                                <h6 class="text-right">Thaumaturgy / Ritual Effect 1:</h6>
+                            </div>
+                            <div class="col-4">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlThauDiscipline1">
+                                    <option value="" selected>--</option>
+                                    <option value="Summoning and Binding">Summoning and Binding</option>
+                                    <option value="Conjuration">Conjuration</option>
+                                    <option value="Divination">Divination</option>
+                                    <option value="Veils">Veils</option>
+                                    <option value="Wards">Wards</option>
+                                    <option value="Crafting">Crafting</option>
+                                    <option value="Transformation and Disruption">Transformation and Disruption</option>
+                                    <option value="Transportation and Worldwalking">Transportation and Worldwalking</option>
+                                    <option value="Thematic">Thematic (ex. Ectomancy)</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlThauType1">
+                                    <option value="" selected>--</option>
+                                    <option value="Complexity">Complexity</option>
+                                    <option value="Casting">Casting</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlThauStr1">
+                                    <option value="" selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-outline-danger btn-sm mt-1" id="btnDelThau1">X</button>
+                            </div>
+                        </div>
+                        <div class="row mt-2" id="rowThau2">
+                            <div class="col-4 align-self-center">
+                                <h6 class="text-right">Thaumaturgy / Ritual Effect 2:</h6>
+                            </div>
+                            <div class="col-4">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlThauDiscipline2">
+                                    <option value="" selected>--</option>
+                                    <option value="Summoning and Binding">Summoning and Binding</option>
+                                    <option value="Conjuration">Conjuration</option>
+                                    <option value="Divination">Divination</option>
+                                    <option value="Veils">Veils</option>
+                                    <option value="Wards">Wards</option>
+                                    <option value="Crafting">Crafting</option>
+                                    <option value="Transformation and Disruption">Transformation and Disruption</option>
+                                    <option value="Transportation and Worldwalking">Transportation and Worldwalking</option>
+                                    <option value="Thematic">Thematic (ex. Ectomancy)</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlThauType2">
+                                    <option value="" selected>--</option>
+                                    <option value="Complexity">Complexity</option>
+                                    <option value="Casting">Casting</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlThauStr2">
+                                    <option value="" selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-outline-danger btn-sm mt-1" id="btnDelThau2">X</button>
+                            </div>
+                        </div>
+                        <div class="row mt-2" id="rowThau3">
+                            <div class="col-4 align-self-center">
+                                <h6 class="text-right">Thaumaturgy / Ritual Effect 3:</h6>
+                            </div>
+                            <div class="col-4">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlThauDiscipline3">
+                                    <option value="" selected>--</option>
+                                    <option value="Summoning and Binding">Summoning and Binding</option>
+                                    <option value="Conjuration">Conjuration</option>
+                                    <option value="Divination">Divination</option>
+                                    <option value="Veils">Veils</option>
+                                    <option value="Wards">Wards</option>
+                                    <option value="Crafting">Crafting</option>
+                                    <option value="Transformation and Disruption">Transformation and Disruption</option>
+                                    <option value="Transportation and Worldwalking">Transportation and Worldwalking</option>
+                                    <option value="Thematic">Thematic (ex. Ectomancy)</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlThauType3">
+                                    <option value="" selected>--</option>
+                                    <option value="Complexity">Complexity</option>
+                                    <option value="Casting">Casting</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrlThauStr3">
+                                    <option value="" selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <button class="btn btn-outline-danger btn-sm mt-1" id="btnDelThau3">X</button>
+                            </div>
+
+                        </div>
+                        <div class="row"><div class="col">&nbsp;</div></div>
+                    </div>
+
+                    <div class="container startHidden" id="itemType_item">
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="Upon attacking successfully with magic, this adds shifts so that the target takes additional stress.">
+                                <h6 class="text-right">Damage:</h6>
+                            </div>
+                            <div class="col-5">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_DamageStr">
+                                    <option value="--" selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_DamageElement">
+                                    <option value="--" selected>--</option>
+                                    <option value="Earth">Earth</option>
+                                    <option value="Air">Air</option>
+                                    <option value="Fire">Fire</option>
+                                    <option value="Water">Water</option>
+                                    <option value="Spirit/Force">Spirit/Force</option>
+                                </select>
+                            </div>
+                            <div class="col-2 align-self-center" data-toggle="tooltip" data-placement="right" title="Increase damage by 1, if you want to exceed your lore rating. Also requires an additional slot.">
+                                <h6 class="text-right">Added Strength:</h6>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_DamageAdded">
+                                    <option value="--" selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="Upon being attacked successfully, this decreases the shifts of stress received.">
+                                <h6 class="text-right">Protection:</h6>
+                            </div>
+                            <div class="col-5">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_ProtStr">
+                                    <option selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_ProtType">
+                                    <option selected>--</option>
+                                    <option value="Physical">Physical</option>
+                                    <option value="Mental">Mental</option>
+                                    <option value="Magical">Magical</option>
+                                </select>
+                            </div>
+                            <div class="col-2 align-self-center" data-toggle="tooltip" data-placement="right" title="Increase protection by 1, if you want to exceed your lore rating. Also requires an additional slot.">
+                                <h6 class="text-right">Added Strength:</h6>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_ProtAdded">
+                                    <option selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="A one-time passive block against attacks or intrusions.">
+                                <h6 class="text-right">Block:</h6>
+                            </div>
+                            <div class="col-5">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_BlockStr">
+                                    <option selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_BlockType">
+                                    <option selected>--</option>
+                                    <option value="Physical">Physical</option>
+                                    <option value="Mental">Mental</option>
+                                    <option value="Magical">Magical</option>
+                                </select>
+                            </div>
+                            <div class="col-2 align-self-center" data-toggle="tooltip" data-placement="right" title="Increase block by 1, if you want to exceed your lore rating. Also requires an additional slot.">
+                                <h6 class="text-right">Added Strength:</h6>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_BlockAdded">
+                                    <option selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="Magic rushes out in a small (1 ft x 1 ft) area, affecting nearby technology.">
+                                <h6 class="text-right">Hex:</h6>
+                            </div>
+                            <div class="col-5">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_HexStr">
+                                    <option selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                            <div class="col-2 align-self-center" data-toggle="tooltip" data-placement="right" title="Increase hex potency by 1, if you want to exceed your lore rating. Also requires an additional slot.">
+                                <h6 class="text-right">Added Strength:</h6>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_HexAdded">
+                                    <option selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="A one-time +2 bonus enhancing a specific Approach and Action combination.">
+                                <h6 class="text-right">Nonmagical Stunt:</h6>
+                            </div>
+                            <div class="col-8 align-self-center">
+                                <span>+2 when</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 ml-2" id="ctrl_NonMagStuntApproach">
+                                    <option selected>--</option>
+                                    <option>Carefully</option>
+                                    <option>Cleverly</option>
+                                    <option>Flashily</option>
+                                    <option>Forcefully</option>
+                                    <option>Quickly</option>
+                                    <option>Sneakily</option>
+                                </select>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_NonMagStuntAction">
+                                    <option selected>--</option>
+                                    <option>attacking</option>
+                                    <option>defending</option>
+                                    <option>overcoming</option>
+                                    <option>create advantages</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="A temporary aspect that may be invoked or compelled once; narratively the effects persist until the end of the scene the aspect is used within.">
+                                <h6 class="text-right">Advantage:</h6>
+                            </div>
+                            <div class="col-8">
+                                <input id="ctrl_AdvantageDescription" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="This lets you break the rules a bit by doing something magical. It cannot help with casting.">
+                                <h6 class="text-right">Magical Stunt:</h6>
+                            </div>
+                            <div class="col-8">
+                                <input id="ctrl_MagicalStuntDesc" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="Number of times the item can be used before recharging.">
+                                <h6 class="text-right">Uses:</h6>
+                            </div>
+                            <div class="col-9">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_ItemUses">
+                                    <option value="1" selected>1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col">&nbsp;</div></div>
+                    </div>
+
+                    <div class="container startHidden" id="itemType_potion">
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="Upon attacking successfully with magic, this adds shifts so that the target takes additional stress.">
+                                <h6 class="text-right">Damage:</h6>
+                            </div>
+                            <div class="col-5">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_PotionDamageStr">
+                                    <option selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_PotionDamageElement">
+                                    <option selected>--</option>
+                                    <option value="Earth">Earth</option>
+                                    <option value="Air">Air</option>
+                                    <option value="Fire">Fire</option>
+                                    <option value="Water">Water</option>
+                                    <option value="Spirit/Force">Spirit/Force</option>
+                                </select>
+                            </div>
+                            <div class="col-2 align-self-center" data-toggle="tooltip" data-placement="right" title="Increase damage by 1, if you want to exceed your lore rating. Also requires an additional slot.">
+                                <h6 class="text-right">Added Strength:</h6>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_PotionDamageAdded">
+                                    <option selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="Upon being attacked successfully, this decreases the shifts of stress received.">
+                                <h6 class="text-right">Protection:</h6>
+                            </div>
+                            <div class="col-5">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_PotionProtStr">
+                                    <option selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_PotionProtType">
+                                    <option selected>--</option>
+                                    <option value="Physical">Physical</option>
+                                    <option value="Mental">Mental</option>
+                                    <option value="Magical">Magical</option>
+                                </select>
+                            </div>
+                            <div class="col-2 align-self-center" data-toggle="tooltip" data-placement="right" title="Increase protection by 1, if you want to exceed your lore rating. Also requires an additional slot.">
+                                <h6 class="text-right">Added Strength:</h6>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_PotionProtAdded">
+                                    <option selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="A one-time passive block against attacks or intrusions.">
+                                <h6 class="text-right">Block:</h6>
+                            </div>
+                            <div class="col-5">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_PotionBlockStr">
+                                    <option selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_PotionBlockType">
+                                    <option selected>--</option>
+                                    <option value="Physical">Physical</option>
+                                    <option value="Mental">Mental</option>
+                                    <option value="Magical">Magical</option>
+                                </select>
+                            </div>
+                            <div class="col-2 align-self-center" data-toggle="tooltip" data-placement="right" title="Increase block by 1, if you want to exceed your lore rating. Also requires an additional slot.">
+                                <h6 class="text-right">Added Strength:</h6>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_PotionBlockAdded">
+                                    <option selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="Magic rushes out in a small (1 ft x 1 ft) area, affecting nearby technology.">
+                                <h6 class="text-right">Hex:</h6>
+                            </div>
+                            <div class="col-5">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_PotionHexStr">
+                                    <option selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                            <div class="col-2 align-self-center" data-toggle="tooltip" data-placement="right" title="Increase hex potency by 1, if you want to exceed your lore rating. Also requires an additional slot.">
+                                <h6 class="text-right">Added Strength:</h6>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_PotionHexAdded">
+                                    <option selected>--</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="A one-time +2 bonus enhancing a specific Approach and Action combination.">
+                                <h6 class="text-right">Nonmagical Stunt:</h6>
+                            </div>
+                            <div class="col-8 align-self-center">
+                                <span>+2 when</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 ml-2" id="ctrl_PotionNonMagStuntApproach">
+                                    <option selected>--</option>
+                                    <option>Carefully</option>
+                                    <option>Cleverly</option>
+                                    <option>Flashily</option>
+                                    <option>Forcefully</option>
+                                    <option>Quickly</option>
+                                    <option>Sneakily</option>
+                                </select>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_PotionNonMagStuntAction">
+                                    <option selected>--</option>
+                                    <option>attacking</option>
+                                    <option>defending</option>
+                                    <option>overcoming</option>
+                                    <option>create advantages</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="A temporary aspect that may be invoked or compelled once; narratively the effects persist until the end of the scene the aspect is used within.">
+                                <h6 class="text-right">Advantage:</h6>
+                            </div>
+                            <div class="col-8">
+                                <input id="ctrl_PotionAdvantageDescription" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="This lets you break the rules a bit by doing something magical. It cannot help with casting.">
+                                <h6 class="text-right">Magical Stunt:</h6>
+                            </div>
+                            <div class="col-8">
+                                <input id="ctrl_PotionMagicalStuntDesc" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="Potion is imperceptible to one sense. Multiple senses can be selected, but each increases the power rating of the potion.">
+                                <h6 class="text-right">Undetectable:</h6>
+                            </div>
+                            <div class="col9">
+                                <label class="custom-control custom-checkbox ml-4">
+                                    <input type="checkbox" class="custom-control-input" value="1" id="chkUndetectableSight">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sight</span>
+                                </label>
+                                <label class="custom-control custom-checkbox ml-4">
+                                    <input type="checkbox" class="custom-control-input" value="2" id="chkUndetectableSound">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Sound</span>
+                                </label>
+                                <label class="custom-control custom-checkbox ml-4">
+                                    <input type="checkbox" class="custom-control-input" value="4" id="chkUndetectableScent">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Scent</span>
+                                </label>
+                                <label class="custom-control custom-checkbox ml-4">
+                                    <input type="checkbox" class="custom-control-input" value="8" id="chkUndetectableTouch">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Touch</span>
+                                </label>
+                                <label class="custom-control custom-checkbox ml-4">
+                                    <input type="checkbox" class="custom-control-input" value="16" id="chkUndetectableTaste">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Taste</span>
+                                </label>
+                                <label class="custom-control custom-checkbox ml-4">
+                                    <input type="checkbox" class="custom-control-input" value="32" id="chkUndetectableMagic">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Magic</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="Change a potion into a gas. Advantages can be applied to an area about the size of a small room. This can also be used to give multiple people doses of a potion at the same time. This does not allow multiple people to be affected by the same dose.">
+                                <h6 class="text-right">Gas:</h6>
+                            </div>
+                            <div class="col-2">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_PotionIsGas">
+                                    <option selected value="No">No</option>
+                                    <option value="Yes">Yes</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-3 align-self-center" data-toggle="tooltip" data-placement="right" title="Number of times this potion can be used. Gas potions can spread doses among multiple targets at once. NOTE: Frequency Specialization does not apply to potions.">
+                                <h6 class="text-right">Doses:</h6>
+                            </div>
+                            <div class="col-8">
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="ctrl_PotionDoses">
+                                    <option value="1" selected>1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col">&nbsp;</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="creation" role="tabpanel">
+                <div class="container card border-top-0">
+                    <div class="row mt-2">
+                        <div class="col-3 mt-2" data-toggle="tooltip" data-placement="left" title="You must allocate at least 1 downtime action towards creating items. Each week dedicated towards a single item reduces complexity.">
+                            <h5>Downtime Actions</h5>
+                        </div>
+                        <div class="col-7">
+
+                        </div>
+                        <div class="col text-right">
+                            <a tabindex="0" class="btn btn-sm" role="button" data-placement="right" data-toggle="popover" data-trigger="focus" title="Downtime Action Details Help" data-content="In the Downtime Action Details tab, you provide specifics of how the item is created, such as how complexity is met during downtime."><img src="Info.png" /></a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon5" data-toggle="tooltip" data-placement="top" title="To optimize your downtime actions, try to fit all your item creation actions in a single week.">Crafting Week</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrl_CraftingWeek" aria-describedby="addon5">
+                                    <option value="solo">Only craft this item during the week. (Counts as 3 towards Complexity cost.)</option>
+                                    <option value="multi" selected>Craft multiple items during the week. (No credit towards complexity.)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon6" data-toggle="tooltip" data-placement="top" title="Each additional week spent preparing counts as 3 towards complexity.">Preparation Week(s)</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrlAdditionalWeeks" aria-describedby="addon6">
+                                    <option value="0" selected>No additional time spent preparing to craft this item.</option>
+                                    <option value="1">One additional week spent preparing to craft this item.</option>
+                                    <option value="2">Two additional weeks spent preparing to craft this item.</option>
+                                    <option value="3">Three additional weeks spent preparing to craft this item.</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-2" data-toggle="tooltip" data-placement="left" title="If extra time is not available, stress can help meet complexity.">
+                            <h5>Stress</h5>
+                        </div>
+                        <div class="col-10 text-right">
+                            <button class="btn btn-secondary btn-sm mr-2" style="width:100px" id="btnClearStress">Reset Stress</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon1" data-toggle="tooltip" data-placement="top" title="Select an available stress box. Each Physical Stress counts as 1 towards Complexity.">Physical</span>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div data-toggle="buttons" class="ml-3 mt-1">
+                                <label class="btn btn-outline-primary btn-sm">
+                                    <input type="radio" name="radPhysicalStressUsed" value="1" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-primary btn-sm">
+                                    <input type="radio" name="radPhysicalStressUsed" value="2" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-primary btn-sm">
+                                    <input type="radio" name="radPhysicalStressUsed" value="3" autocomplete="off">&nbsp;
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon1" data-toggle="tooltip" data-placement="top" title="Select an available stress box. Each Mental Stress counts as 1 towards Complexity.">Mental</span>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div data-toggle="buttons" class="ml-3 mt-1">
+                                <label class="btn btn-outline-primary btn-sm">
+                                    <input type="radio" name="radMentalStressUsed" value="1" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-primary btn-sm">
+                                    <input type="radio" name="radMentalStressUsed" value="2" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-primary btn-sm">
+                                    <input type="radio" name="radMentalStressUsed" value="3" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-primary btn-sm">
+                                    <input type="radio" name="radMentalStressUsed" value="4" autocomplete="off">&nbsp;
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon1" data-toggle="tooltip" data-placement="top" title="Select an available stress box. Each Wealth Stress counts as 2 towards Complexity.">Wealth</span>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div data-toggle="buttons" class="ml-3 mt-1">
+                                <label class="btn btn-outline-primary btn-sm">
+                                    <input class="maxWealth1" type="radio" name="radWealthStressUsed" value="1" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-primary btn-sm">
+                                    <input class="maxWealth2" type="radio" name="radWealthStressUsed" value="2" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-primary btn-sm">
+                                    <input class="maxWealth3" type="radio" name="radWealthStressUsed" value="3" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-primary btn-sm">
+                                    <input class="maxWealth4" type="radio" name="radWealthStressUsed" value="4" autocomplete="off">&nbsp;
+                                </label>
+                                <label class="btn btn-outline-primary btn-sm">
+                                    <input class="maxWealth5" type="radio" name="radWealthStressUsed" value="5" autocomplete="off">&nbsp;
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-2" data-toggle="tooltip" data-placement="left" title="While you can use consequences to pay off your complexity, you should consider exhausting every other available option first.">
+                            <h5>Consequences</h5>
+                        </div>
+                        <div class="col-10">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon1" data-toggle="tooltip" data-placement="top" title="">Physical</span>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div data-toggle="buttons" class="ml-3 mt-1 btn-group-sm btn-block">
+                                <label class="btn btn-outline-primary w-25 mr-4">
+                                    <input type="checkbox" id="chkPhyConsUsed1" value="2" autocomplete="off">Mild (2)
+                                </label>
+                                <label class="btn btn-outline-primary w-25 mr-4">
+                                    <input type="checkbox" id="chkPhyConsUsed2" value="4" autocomplete="off">Moderate (4)
+                                </label>
+                                <label class="btn btn-outline-primary w-25 mr-4">
+                                    <input type="checkbox" id="chkPhyConsUsed3" value="6" autocomplete="off">Severe (6)
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon1" data-toggle="tooltip" data-placement="top" title="">Mental</span>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <div data-toggle="buttons" class="ml-3 mt-1 btn-group-sm btn-block">
+                                <label class="btn btn-outline-primary w-25 mr-4">
+                                    <input type="checkbox" id="chkMentConsUsed1" value="2" autocomplete="off">Mild (2)
+                                </label>
+                                <label class="btn btn-outline-primary w-25 mr-4">
+                                    <input type="checkbox" id="chkMentConsUsed2" value="4" autocomplete="off">Moderate (4)
+                                </label>
+                                <label class="btn btn-outline-primary w-25 mr-4">
+                                    <input type="checkbox" id="chkMentConsUsed3" value="6" autocomplete="off">Severe (6)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon9" data-toggle="tooltip" data-placement="top" title="A flaw counts towards 2 Complexity. Focus items cannot have flaws. You can choose to add a flaw even if complexity is already met.">Flaw</span>
+                                <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrl_Flaw" aria-describedby="addon8">
+                                    <option value="none" selected>None</option>
+                                    <option value="cost">Cost</option>
+                                    <option value="weak">Weakness</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="addon9" data-toggle="tooltip" data-placement="top" title="Provide a description of the Compel (cost) or Aspect (weakness).">Flaw Details</span>
+                                <input id="ctrl_FlawDescription" class="form-control" aria-describedby="addon9" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-6">
+
+                        </div>
+                        <div class="col-6">
+                            <div class="alert alert-success" role="alert" id="divComplexityRequired" data-toggle="tooltip" data-placement="bottom" title="Modify your downtime action allocation, spend stress and/or consequences, or add flaws to bring this to zero (0).">
+                                <span><b>Complexity still needed to complete item creation:</b> 0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="results" role="tabpanel">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="succModalLabel">Item Results</h5>
+                        </div>
+                        <div class="modal-body" id="divItemDetails">
+                            <div class="container-fluid card">
+                                <div class="row mb-2 mt-2">
+                                    <div class="col-md-8" id="divModalItemName">Name: ((Item Name))</div>
+                                    <div class="col-md-4" id="divModalItemOwner">Owner: OPEN</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-8" id="divModalItemDescription">Description: ((Item Description))</div>
+                                    <div class="col-md-4" id="divModalItemSize">Size: 0</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-12" id="divModalItemDetails">((Item Details))</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-2" id="divModalItemFlaw">((Flaw))</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-8" id="divModalItemUses">Uses: (none)</div>
+                                    <div class="col-md-4" id="divModalItemSlots">Slots: 0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body" id="divItemSpecifications">
+                            <div class="container-fluid card">
+                                <div class="row mt-2">
+                                    <div class="col-md"><b>Item Specifications</b></div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md" id="divModalItemSpecs">((Item Specifications))</div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md"><b>Creation Details</b></div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-md" id="divModalItemCrafting">((Item Crafting))</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-body" id="divItemDetails">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="alert alert-info" role="alert" id="divComplexity" data-toggle="tooltip" data-placement="bottom" title="Complexity above your Lore will need to be paid for in the Creation Details section.">
+                                            <span><b>Complexity:</b> 0</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="alert alert-info" role="alert" id="divPower" data-toggle="tooltip" data-placement="bottom" title="Power is compared to your Casting level to determine how likely you are to succeed.">
+                                            <span><b>Power:</b> 0</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="alert alert-info" role="alert" id="divSlots" data-toggle="tooltip" data-placement="bottom" title="Total slots required to create the item will be displayed here. For potions and items, you only spend the slots when you create the item. Focus items require you to dedicate the slots each month if you wish to use that focus item.">
+                                            <span><b>Slots:</b> 0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-info" role="alert" id="divChance" data-toggle="tooltip" data-placement="left" title="Percentage based on Power vs. Casting. Your actual success or failure can still be modified by spending Fate Points. Success shows the total chance of making an item, including a flawed item or succeeding with style. Chances for Flawless and With Style are also shown.">
+                                            <span class="mr-4"><b>Success:</b> 0%</span>
+                                            <span class="mr-4"><b>Flawless:</b> 0%</span>
+                                            <span class="mr-4"><b>w/ Style:</b> 0%</span>
+                                            <span><b>P v. C:</b> --</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Dialog -->
+        <div class="modal fade " id="modErrMsg" tabindex="-1" role="dialog" aria-labelledby="errModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content text-danger">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errModalLabel">ERR_MODAL_LABEL</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modalErrListDiv">(modal Err List Div)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
