@@ -23,11 +23,11 @@
     <div class="container card mt-3">
         <div class="row">
             <div class="col mt-2 text-right">
-                <button type="button" id="btnToogleTooltips" role="button" class="btn btn-sm btn-secondary mr-3" style="width: 125px">Enable Tooltips</button>
                 <a tabindex="0" class="btn btn-sm btn-outline-danger" role="button" data-placement="bottom" data-toggle="popover" data-trigger="focus" title="Creation Assistant Disclaimer" style="width: 125px"
                    data-content="The 'Stories in the Sanguine City - Magic Item Creation Assistant' is an unauthorized utility. It has not been reviewed by, nor is it approved by the SSC Storytellers. This site is strictly for entertainment purposes.">
                     <b>DISCLAIMER</b>
                 </a>
+                <button type="button" id="btnToogleTooltips" role="button" class="btn btn-sm btn-secondary ml-3" style="width: 125px">Enable Tooltips</button>
             </div>
         </div>
         <div class="row mb-4">
@@ -56,13 +56,13 @@
                 <div class="container card border-top-0">
                     <div class="row mt-2">
                         <div class="col-6 mt-2">
-                            <h5 data-toggle="tooltip" data-placement="left" title="Approaches (Careful, Clever, Flashy, Forceful, Quick, Sneaky) are ranked on your character sheet from 0 to 3.">Approaches</h5>
+                            <h5 data-toggle="tooltip" data-placement="right" title="Approaches (Careful, Clever, Flashy, Forceful, Quick, Sneaky) are ranked on your character sheet from 0 to 3.">Approaches</h5>
                         </div>
                         <div class="col-6">
                             <div class="btn-group" role="group">
                                 <h5 class="mt-2" data-toggle="tooltip" data-placement="left" title="If you have created or acquired a Focus Item to help you create Enchanted Items and Potions, specify their strength here. You cannot use Focus Items to help create new Focus Items.">Thaumaturgy (Crafting) Focus Items</h5>
                                 <span style="width:160px">&nbsp;</span>
-                                <a tabindex="0" class="btn btn-sm" role="button" data-placement="right" data-toggle="popover" data-trigger="focus" title="Character Information Help" data-content="In the Character Information tab, you supply the information on your character sheet that determines how skilled a crafter you are. Include any items that might help when crafting, any specializations you have, and any stress and consequences that you've already used up (to show what is available to pay down complexity)."><img src="Info.png" /></a>
+                                <a tabindex="0" class="btn btn-sm" role="button" data-placement="left" data-toggle="popover" data-trigger="focus" title="Character Information Help" data-content="In the Character Information tab, you supply the information on your character sheet that determines how skilled a crafter you are. Include any items that might help when crafting, any specializations you have, and any stress and consequences that you've already used up (to show what is available to pay down complexity)."><img src="Info.png" /></a>
                             </div>
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-2" data-toggle="tooltip" data-placement="left" title="If you have Thaumaturgy, and have selected a specialization in crafting, you may add it in this section. Additional specialization levels can be purchased as Refinements.">
+                        <div class="col-2" data-toggle="tooltip" data-placement="right" title="If you have Thaumaturgy, and have selected a specialization in crafting, you may add it in this section. Additional specialization levels can be purchased as Refinements.">
                             <h5>Specializations</h5>
                         </div>
                         <div class="col-10">
@@ -168,7 +168,7 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-2" data-toggle="tooltip" data-placement="left" title="Stress that is ALREADY USED before item creation begins, and thus is not available.">
+                        <div class="col-2" data-toggle="tooltip" data-placement="right" title="Stress that is ALREADY USED before item creation begins, and thus is not available.">
                             <h5>Stress</h5>
                         </div>
                         <div class="col-10">
@@ -258,7 +258,7 @@
                     </div>
 
                     <div class="row mt-3">
-                        <div class="col-2" data-toggle="tooltip" data-placement="left" title="Consequences that are ALREADY USED before item creation begins, and thus is not available.">
+                        <div class="col-2" data-toggle="tooltip" data-placement="right" title="Consequences that are ALREADY USED before item creation begins, and thus is not available.">
                             <h5>Consequences</h5>
                         </div>
                         <div class="col-10">
@@ -315,7 +315,7 @@
                         <div class="col-9">
                         </div>
                         <div class="col text-right">
-                            <a tabindex="0" class="btn btn-sm" role="button" data-placement="right" data-toggle="popover" data-trigger="focus" title="Item Details Help" data-content="In the Item Details tab, you provide the description of the item and the effects that the item provides. When you select the Item Type, you'll be able to select effects approrpiate to that type."><img src="Info.png" /></a>
+                            <a tabindex="0" class="btn btn-sm" role="button" data-placement="left" data-toggle="popover" data-trigger="focus" title="Item Details Help" data-content="In the Item Details tab, you provide the description of the item and the effects that the item provides. When you select the Item Type, you'll be able to select effects approrpiate to that type."><img src="Info.png" /></a>
                         </div>
                     </div>
                     <div class="row">
@@ -362,7 +362,7 @@
                     <div class="row mt-1 mb-3">
                         <div class="col">
                             <div class="input-group">
-                                <span class="input-group-addon" id="ddlItemType" data-toggle="tooltip" data-placement="left" title="You must select a type before you can specify the item effect(s).">Item Type</span>
+                                <span class="input-group-addon" id="ddlItemType" data-toggle="tooltip" data-placement="top" title="You must select a type before you can specify the item effect(s).">Item Type</span>
                                 <select class="custom-select mb-2 mr-sm-2 mb-sm-0 form-control" id="ctrl_ItemType" aria-describedby="ddlItemType">
                                     <option value="" selected>(Select)</option>
                                     <option value="focus">Focus Item: Multiple-use item that improves specific spellcasting efforts.</option>
@@ -1027,14 +1027,14 @@
             <div class="tab-pane fade" id="creation" role="tabpanel">
                 <div class="container card border-top-0">
                     <div class="row mt-2">
-                        <div class="col-3 mt-2" data-toggle="tooltip" data-placement="left" title="You must allocate at least 1 downtime action towards creating items. Each week dedicated towards a single item reduces complexity.">
+                        <div class="col-3 mt-2" data-toggle="tooltip" data-placement="right" title="You must allocate at least 1 downtime action towards creating items. Each week dedicated towards a single item reduces complexity.">
                             <h5>Downtime Actions</h5>
                         </div>
                         <div class="col-7">
 
                         </div>
                         <div class="col text-right">
-                            <a tabindex="0" class="btn btn-sm" role="button" data-placement="right" data-toggle="popover" data-trigger="focus" title="Downtime Action Details Help" data-content="In the Downtime Action Details tab, you provide specifics of how the item is created, such as how complexity is met during downtime."><img src="Info.png" /></a>
+                            <a tabindex="0" class="btn btn-sm" role="button" data-placement="left" data-toggle="popover" data-trigger="focus" title="Downtime Action Details Help" data-content="In the Downtime Action Details tab, you provide specifics of how the item is created, such as how complexity is met during downtime."><img src="Info.png" /></a>
                         </div>
                     </div>
                     <div class="row">
@@ -1062,7 +1062,7 @@
                         </div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-2" data-toggle="tooltip" data-placement="left" title="If extra time is not available, stress can help meet complexity.">
+                        <div class="col-2" data-toggle="tooltip" data-placement="right" title="If extra time is not available, stress can help meet complexity.">
                             <h5>Stress</h5>
                         </div>
                         <div class="col-10 text-right">
@@ -1136,7 +1136,7 @@
                     </div>
 
                     <div class="row mt-3">
-                        <div class="col-2" data-toggle="tooltip" data-placement="left" title="While you can use consequences to pay off your complexity, you should consider exhausting every other available option first.">
+                        <div class="col-2" data-toggle="tooltip" data-placement="right" title="While you can use consequences to pay off your complexity, you should consider exhausting every other available option first.">
                             <h5>Consequences</h5>
                         </div>
                         <div class="col-10">
