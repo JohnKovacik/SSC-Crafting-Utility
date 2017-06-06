@@ -1285,10 +1285,12 @@ function addBasicEffect(effectName, desc) {
             var freePwr = Math.min((charInfo.spec_power - charInfo.used_spec_power), 2);
             if (freePwr == 2) {
                 addEffect(2, 0, 0, effectName + ' (from Power Specialization)', effFormat, "");
+                charInfo.used_spec_power += 2;
             }
             else {
                 addEffect(freePwr, 0, 0, effectName + ' (power reduced by Power Specialization)', effFormat, "");
                 addEffect((2 - freePwr), 1, (2 - freePwr), effectName + "  (" + desc + ")", effFormat, "");
+                charInfo.used_spec_power += (2 - freePwr);
             }
         }
         else {
