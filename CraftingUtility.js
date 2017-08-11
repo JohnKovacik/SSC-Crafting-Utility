@@ -477,15 +477,8 @@ function validateCharacterInfo() {
     setCharacterInfo();
     $('#charInfo .alert-danger').removeClass('alert-danger');
 
-    // Make sure Approaches aren't both 3, or both 0.
-    if (charInfo.lore == 3 && charInfo.cast == 3) {
-        _addErrMsg("You cannot use the same Approach for Lore and Casting. Since you can only have 1 Good (3) Approach, either Lore or Casting must be less than 3.");
-        _valid = false;
-
-        $("#ctrl_Conviction").addClass('alert-danger');
-        $("#ctrl_Casting").addClass('alert-danger');
-    }
-    else if (charInfo.lore == 0 && charInfo.cast == 0) {
+    // Make sure Approaches aren't both 0.
+    if (charInfo.lore == 0 && charInfo.cast == 0) {
         _addErrMsg("You must set your Approaches for Lore and Casting. Since you can only have 1 Mediocre (0) Approach, either Lore or Casting must be greater than 0.");
         _valid = false;
 
